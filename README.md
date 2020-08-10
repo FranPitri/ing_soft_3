@@ -1,3 +1,3 @@
 ## Ingeniería de Software 3
 
-Just some exercises.
+Just some exercises. Nothing more, nothing less.
