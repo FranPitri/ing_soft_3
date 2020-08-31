@@ -1,0 +1,17 @@
+version: '3.6'
+services:
+    app:
+        image: alexisfr/flask-app:latest
+        depends_on:
+            - db
+        environment:
+            - REDIS_HOST=db
+            - REDIS_PORT=6379
+        ports:
+            - "5000:5000"
+    db:
+        image: redis:alpine
+        volumes:
+            - redis_data:/data
+volumes:
+    redis_data:
