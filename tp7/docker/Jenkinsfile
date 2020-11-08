@@ -1,7 +1,7 @@
 pipeline {
     environment {
         imageName = "franpitri/spring-boot-test"
-        registryCredential = "docker-hub-credentials"
+        registryCredentials = "docker-hub-credentials"
     }
     
     agent any
@@ -16,7 +16,7 @@ pipeline {
         stage("Build") {
             steps {
                 script {
-                    def app = docker.build("franpitri/spring-boot-test", "-f Dockerfile.multistage .")
+                    def app = docker.build(imageName, "-f Dockerfile.multistage .")
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry("", "docker-hub-credentials") {
+                    docker.withRegistry("", registryCredentials) {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
